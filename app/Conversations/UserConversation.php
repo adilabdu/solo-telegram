@@ -69,6 +69,7 @@ class UserConversation extends Conversation
             $this->reason = $answer->getText();
 
 //            $this->say('Perfect! That is it. Welcome to the club. And remember, first rule of SOLO, is never talk about SOL-- of course we kid! Tell everyone you know!');
+            $this->say('Great! So, just to confirm... ');
             $this->storeUser();
         });        
     }
@@ -97,13 +98,12 @@ class UserConversation extends Conversation
 
     public function confirm() {
 
-        $markdownText = 'Okay, so just to confirm:
-        
-                        <b>Name</b>: '.$this->fullName. '
-                        <b>Contact</b>: '.$this->contactInfo. '
-                        <b>Profession</b>: '.$this->profession. '
-                        <b>Organization</b>: '.$this->organization. '
-                        <b>Reason for joining the network</b>: '.$this->reason;
+        $markdownText =
+'<b>Name</b>   '.$this->fullName. '
+<b>Contact</b>   '.$this->contactInfo. '
+<b>Profession</b>   '.$this->profession. '
+<b>Organization</b>   '.$this->organization. '
+<b>Reason for joining the network</b>   '.$this->reason;
 
         $question = Question::create($markdownText)
             ->fallback('Unable to ask question')
