@@ -101,6 +101,7 @@ class UserConversation extends Conversation
 <b>Contact</b>   '.$this->contactInfo. '
 <b>Profession</b>   '.$this->profession. '
 <b>Organization</b>   '.$this->organization. '
+
 <b>Reason for joining SOLO</b>   '.$this->reason;
 
         $question = Question::create($markdownText)
