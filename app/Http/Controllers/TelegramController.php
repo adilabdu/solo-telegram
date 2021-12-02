@@ -44,8 +44,8 @@ class TelegramController extends Controller
         //     $bot->reply('Congrats '.$userID.', you have triggered the command successfully!');
 
         // }
-        
-        $bot->startConversation(new UserConversation());
+
+        $bot->startConversation(new UserConversation);
     }
 
     public function fallback(BotMan $bot) {
