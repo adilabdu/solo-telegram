@@ -10,3 +10,5 @@ $botman->hears('Hi', function ($bot) {
 $botman->hears('Start conversation', BotManController::class.'@startConversation');
 
 $botman->hears('/start', TelegramController::class.'@start');
+
+$botman->fallback(TelegramController::class.'@fallback');

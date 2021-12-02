@@ -12,4 +12,8 @@ class TelegramController extends Controller
         $bot->reply('Start command triggered successfully!');
     }
 
+    public function fallback(BotMan $bot) {
+        $bot->reply('Sorry, I did not get that, try running command "\help"');
+    }
+
 }
