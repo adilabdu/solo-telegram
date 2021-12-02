@@ -74,7 +74,7 @@ class UserConversation extends Conversation
     {
         $this->askFullName();
         User::create([
-            "telegram_id" => $this->telegram_id,
+            "telegram_id" => '$this->telegram_id',
             "name" => $this->fullName,
             "contact" => $this->contactInfo,
             "profession" => $this->profession,
