@@ -59,7 +59,7 @@ class UserConversation extends Conversation
 
             $this->reason = $answer->getText();
 
-            $this->say('Perfect! That is it. Welcome to the club. And remember, first rule of SOLO, is never talk about -- of course we kid. Tell everyone you know!');
+            $this->say('Perfect! That is it. Welcome to the club. And remember, first rule of SOLO, is never talk about SOL-- of course we kid! Tell everyone you know!');
         });
     }
 
