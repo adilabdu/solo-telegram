@@ -98,11 +98,12 @@ class UserConversation extends Conversation
     public function confirm() {
 
         $markdownText = "Okay, so just to confirm:
-            **Name**: ".$this->fullName. "
-            **Contact**: ".$this->contactInfo. ";
-            **Profession**: ".$this->profession. ";
-            **Organization**: ".$this->organization. ";
-            **Reason for Joining the Network**: ".$this->reason;
+        
+        **Name**: ".$this->fullName. "
+        **Contact**: ".$this->contactInfo. "
+        **Profession**: ".$this->profession. "
+        **Organization**: ".$this->organization. "
+        **Reason for Joining the Network**: ".$this->reason;
 
         $question = Question::create($markdownText)
             ->fallback('Unable to ask question')
