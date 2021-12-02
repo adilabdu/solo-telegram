@@ -104,7 +104,7 @@ class UserConversation extends Conversation
             **Organization**: ".$this->organization. ";
             **Reason for Joining the Network**: ".$this->reason;
 
-        $question = Question::create($markdownText, ["parse_mode" => "Markdown"])
+        $question = Question::create($markdownText)
             ->fallback('Unable to ask question')
             ->callbackId('ask_reason')
             ->addButtons([
@@ -122,7 +122,7 @@ class UserConversation extends Conversation
                     $this->say(Inspiring::quote());
                 }
             }
-        });
+        }, ["parse_mode" => "Markdown"]);
     }
 
     // Start conversation
