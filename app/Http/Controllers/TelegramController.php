@@ -44,13 +44,15 @@ class TelegramController extends Controller
             "Expires"             => "0"
         );
 
-        $columns = array('Name', 'Contact', 'Profession', 'Organization', 'Reason for Participation', 'Registered Date');
+        $columns = array('No.', 'Name', 'Contact', 'Profession', 'Organization', 'Reason for Participation', 'Registered Date');
 
         $callback = function() use($users, $columns) {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columns);
 
+            $roll = 1;
             foreach ($users as $user) {
+                $row['No.'] = $roll;
                 $row['Name']  = $user->name;
                 $row['Contact']    = $user->contact;
                 $row['Profession']    = $user->profession;
@@ -58,11 +60,13 @@ class TelegramController extends Controller
                 $row['Reason for Participation']  = $user->reason;
                 $row['Registered Date'] = $user->created_at;
 
-                fputcsv($file, array($row['Name'], 
+                fputcsv($file, array($row['No.'], $row['Name'], 
                                 $row['Contact'], $row['Profession'], 
                                 $row['Organization'], $row['Reason for Participation'], 
                                 $row['Registered Date'])
                             );
+            
+                $roll++;
             }
 
             fclose($file);
