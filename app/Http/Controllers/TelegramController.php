@@ -23,7 +23,7 @@ class TelegramController extends Controller
             }           
 
         } catch(Exception $e) {
-            $bot->reply('Exception: ' . $e);
+            $bot->reply('Exception: ' + $e);
         }
 
     }
