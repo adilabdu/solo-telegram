@@ -16,7 +16,11 @@ class TelegramController extends Controller
         try {
             User::create([
                 "telegram_id" => $userID,
-                "name" => $bot->getUser()->getFirstName()
+                "name" => $bot->getUser()->getFirstName(),
+                "contact" => "Right here, where else 90210",
+                "profession" => "Arts Curator",
+                "organization" => "Independent Arts Foundation",
+                "reason" => "Networking, Connections"
             ]);            
 
             $bot->reply('User created, with name ' . $bot->getUser()->getFirstName());
