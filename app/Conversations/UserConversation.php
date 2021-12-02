@@ -4,6 +4,7 @@ namespace App\Conversations;
 
 use BotMan\BotMan\Messages\Incoming\Answer;
 use BotMan\BotMan\Messages\Conversations\Conversation;
+use App\User;
 
 class UserConversation extends Conversation
 {
@@ -13,6 +14,11 @@ class UserConversation extends Conversation
     protected $profession;
     protected $organization;
     protected $reason;
+    protected $telegram_id;
+
+    public function __construct($userID) {
+        $this->telegram_id = $userID;
+    }
  
     public function askFullName() {
         $this->ask('What is your full name?', function(Answer $answer) {
@@ -67,5 +73,13 @@ class UserConversation extends Conversation
     public function run()
     {
         $this->askFullName();
+        User::create([
+            "telegram_id" => $this->telegram_id,
+            "name" => $this->fullName,
+            "contact" => $this->contactInfo,
+            "profession" => $this->profession,
+            "organization" => $this->organization,
+            "reason" => $this->reason
+        ]); 
     }
 }
