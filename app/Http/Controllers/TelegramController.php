@@ -12,40 +12,20 @@ class TelegramController extends Controller
     
     public function start(BotMan $bot) {
         
-        // $userID = $bot->getUser()->getId();
+        $userID = $bot->getUser()->getId();
 
-        // try {
-            
-        //     if(User::where("telegram_id", "=", $userID)->exists()) {
-        //         $bot->reply("You have already registered. Thank you for participating!");
-        //     } else {
-        //         User::create([
-        //             "telegram_id" => $userID,
-        //             "name" => $bot->getUser()->getFirstName(),
-        //             // "contact" => "Right here, where else 90210",
-        //             // "profession" => "Arts Curator",
-        //             // "organization" => "Independent Arts Foundation",
-        //             // "reason" => "Networking, Connections"
-        //         ]); 
+        try {
 
-        //         $bot->reply('Successfully registered, with name ' . $bot->getUser()->getFirstName());
-        //     }           
+            if(User::where("telegram_id", "=", $userID)->exists()) {
+                $bot->reply("You have already registered. Thank you for participating!");
+            } else {
+                $bot->startConversation(new UserConversation($userID));
+            }           
 
-        // } catch(Exception $e) {
-        //     $bot->reply('Exception: ' + $e);
-        // }
+        } catch(Exception $e) {
+            $bot->reply('Exception: ' + $e);
+        }
 
-        // if(User::where('telegram_id', $userID)->exists()) {
-        //     $bot->reply('You have already started the bot!');
-        // } else {
-        //     User::create([
-        //         "telegram_id" => $userID
-        //     ]);
-        //     $bot->reply('Congrats '.$userID.', you have triggered the command successfully!');
-
-        // }
-
-        $bot->startConversation(new UserConversation);
     }
 
     public function fallback(BotMan $bot) {
