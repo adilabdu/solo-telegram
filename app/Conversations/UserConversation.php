@@ -130,6 +130,7 @@ class UserConversation extends Conversation
                 Button::create('Profession')->value('profession'),
                 Button::create('Organization')->value('organization'),
                 Button::create('Reason for joining')->value('reason'),
+                Button::create('Never mind -- take me back 🔙')->value('reason'),
             ]);
 
         $this->ask($question, function (Answer $answer) {
@@ -181,8 +182,7 @@ class UserConversation extends Conversation
     }
 
     // Start conversation
-    public function run()
-    {
+    public function run() {
         $this->askFullName();
     }
 }
