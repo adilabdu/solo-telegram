@@ -5,6 +5,9 @@ namespace App\Conversations;
 use BotMan\BotMan\Messages\Incoming\Answer;
 use BotMan\BotMan\Messages\Conversations\Conversation;
 use App\User;
+use BotMan\BotMan\Messages\Outgoing\Actions\Button;
+use BotMan\BotMan\Messages\Outgoing\Question;
+use Illuminate\Foundation\Inspiring;
 
 class UserConversation extends Conversation
 {
@@ -88,6 +91,30 @@ class UserConversation extends Conversation
             "organization" => $this->organization,
             "reason" => $this->reason
         ]);
+
+        $this->confirm();
+    }
+
+    public function confirm() {
+        $question = Question::create("Thanks! That's all we need. Just to confirm: ", ["parse_mode" => "Markdown"])
+            ->fallback('Unable to ask question')
+            ->callbackId('ask_reason')
+            ->addButtons([
+                Button::create('Edit')->value('edit'),
+                Button::create('Perfect')->value('perfect'),
+            ]);
+
+
+        return $this->ask($question, function (Answer $answer) {
+            if ($answer->isInteractiveMessageReply()) {
+                if ($answer->getValue() === 'joke') {
+                    $joke = json_decode(file_get_contents('http://api.icndb.com/jokes/random'));
+                    $this->say($joke->value->joke);
+                } else {
+                    $this->say(Inspiring::quote());
+                }
+            }
+        });
     }
 
     // Start conversation
