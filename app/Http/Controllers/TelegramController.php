@@ -29,7 +29,7 @@ class TelegramController extends Controller
     }
 
     public function help(BotMan $bot) {
-        $bot->reply('This is SOLO SOLO SOLO a performing arts network – linking artists, researchers, and programmers whose work center the East African performing arts practice, narrative, and archive.
+        $bot->reply('This is SOLO SOLO SOLO a performing arts network – linking artists, researchers, and programmers whose work center the East African performing arts practice, narrative, and archive. 
         
         Are you a performing artist living and working in East Africa, join our network and activate the SOLO SOLO SOLO annual program physically and/or online.');
     }
