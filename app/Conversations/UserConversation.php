@@ -144,31 +144,39 @@ class UserConversation extends Conversation
             case 'name':
                 $this->ask("What's your full name?", function(Answer $answer) {
                     $this->fullName = $answer->getText();
-                    $this->say('Great! So, <i>again</i> just to confirm... ', ["parse_mode" => "HTML"]);
-                    $this->confirm();
+                    $this->reconfirm();
                 });
                 break;
             case 'contact':
                 $this->ask("How shall we reach you?", function(Answer $answer) {
                     $this->contactInfo = $answer->getText();
+                    $this->reconfirm();
                 });
                 break;
             case 'profession':
                 $this->ask("What's your profession?", function(Answer $answer) {
                     $this->profession = $answer->getText();
+                    $this->reconfirm();
                 });
                 break;
             case 'organization':
                 $this->ask("Where do you work (organization)?", function(Answer $answer) {
                     $this->organization = $answer->getText();
+                    $this->reconfirm();
                 });
                 break;
             case 'reason':
                 $this->ask("Why do you want to join SOLO SOLO SOLO?", function(Answer $answer) {
                     $this->reason = $answer->getText();
+                    $this->reconfirm();
                 });
                 break;
         }
+    }
+    
+    private function reconfirm() {
+        $this->say('Great! So, <i>again</i> just to confirm... ', ["parse_mode" => "HTML"]);
+        $this->confirm();
     }
 
     // Start conversation
