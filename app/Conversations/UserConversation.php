@@ -144,6 +144,8 @@ class UserConversation extends Conversation
             case 'name':
                 $this->ask("What's your full name?", function(Answer $answer) {
                     $this->fullName = $answer->getText();
+                    $this->say('Great! So, <i>again</i> just to confirm... ', ["parse_mode" => "HTML"]);
+                    $this->confirm();
                 });
                 break;
             case 'contact':
@@ -167,9 +169,6 @@ class UserConversation extends Conversation
                 });
                 break;
         }
-
-        $this->say('Great! So, <i>again</i> just to confirm... ', ["parse_mode" => "HTML"]);
-        $this->confirm();
     }
 
     // Start conversation
