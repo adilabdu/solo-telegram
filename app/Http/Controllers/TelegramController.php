@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use BotMan\BotMan\BotMan;
 use App\User;
-use Error;
+use Exception;
 
 class TelegramController extends Controller
 {
@@ -14,19 +14,24 @@ class TelegramController extends Controller
         $userID = $bot->getUser()->getId();
 
         try {
-            User::create([
-                "telegram_id" => $userID,
-                "name" => $bot->getUser()->getFirstName(),
-                "contact" => "Right here, where else 90210",
-                "profession" => "Arts Curator",
-                "organization" => "Independent Arts Foundation",
-                "reason" => "Networking, Connections"
-            ]);            
+            
+            if(User::where("telegram_id", "=", $userID)->exists()) {
+                $bot->reply("You have already registered. Thank you for participating!");
+            } else {
+                User::create([
+                    "telegram_id" => $userID,
+                    "name" => $bot->getUser()->getFirstName(),
+                    "contact" => "Right here, where else 90210",
+                    "profession" => "Arts Curator",
+                    "organization" => "Independent Arts Foundation",
+                    "reason" => "Networking, Connections"
+                ]); 
+            }           
 
             $bot->reply('User created, with name ' . $bot->getUser()->getFirstName());
 
-        } catch(Error $e) {
-            $bot->reply('Error: ' + $e);
+        } catch(Exception $e) {
+            $bot->reply('Exception: ' + $e);
         }
 
         // if(User::where('telegram_id', $userID)->exists()) {
