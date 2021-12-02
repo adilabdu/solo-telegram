@@ -73,7 +73,7 @@ class UserConversation extends Conversation
     public function run()
     {
         $this->askFullName();
-        $this->say($this->fullName);
+        $this->say("Discovery");
         $this->say($this->telegram_id);
         $this->say($this->contactInfo);
         $this->say($this->profession);
