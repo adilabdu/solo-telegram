@@ -130,7 +130,7 @@ class UserConversation extends Conversation
                 Button::create('Profession')->value('profession'),
                 Button::create('Organization')->value('organization'),
                 Button::create('Reason for joining')->value('reason'),
-                Button::create('Never mind -- take me back 🔙')->value('reason'),
+                Button::create('Never mind -- take me back 🔙')->value('return'),
             ]);
 
         $this->ask($question, function (Answer $answer) {
@@ -172,6 +172,9 @@ class UserConversation extends Conversation
                     $this->reason = $answer->getText();
                     $this->reconfirm();
                 });
+                break;
+            case 'return':
+                $this->confirm();
                 break;
         }
     }
