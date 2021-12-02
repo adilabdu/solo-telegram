@@ -96,7 +96,12 @@ class UserConversation extends Conversation
 
     public function confirm() {
 
-        $markdownText = '<b>Name</b>   '.$this->fullName. '<br><b>Contact</b>   '.$this->contactInfo. '<br><b>Profession</b>   '.$this->profession. '<br><b>Organization</b>   '.$this->organization. '<br><br><b>Reason for joining SOLO</b>   '.$this->reason;
+        $markdownText =
+'<b>Name</b>   '.$this->fullName. '
+<b>Contact</b>   '.$this->contactInfo. '
+<b>Profession</b>   '.$this->profession. '
+<b>Organization</b>   '.$this->organization. '
+<b>Reason for joining SOLO</b>   '.$this->reason;
 
         $question = Question::create($markdownText)
             ->addButtons([
