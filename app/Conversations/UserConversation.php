@@ -73,13 +73,19 @@ class UserConversation extends Conversation
     public function run()
     {
         $this->askFullName();
-        User::create([
-            "telegram_id" => '$this->telegram_id',
-            "name" => $this->fullName,
-            "contact" => $this->contactInfo,
-            "profession" => $this->profession,
-            "organization" => $this->organization,
-            "reason" => $this->reason
-        ]); 
+        $this->say($this->fullName);
+        $this->say($this->telegram_id);
+        $this->say($this->contactInfo);
+        $this->say($this->profession);
+        $this->say($this->organization);
+        $this->say($this->reason);
+        // User::create([
+        //     "telegram_id" => '$this->telegram_id',
+        //     "name" => $this->fullName,
+        //     "contact" => $this->contactInfo,
+        //     "profession" => $this->profession,
+        //     "organization" => $this->organization,
+        //     "reason" => $this->reason
+        // ]);
     }
 }
