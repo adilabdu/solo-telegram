@@ -12,7 +12,7 @@ class TelegramController extends Controller
         
         $userID = $bot->getUser()->getId();
         
-        if(User::where('telegram_id', $userID)->first()) {
+        if(User::where('telegram_id', $userID)->exists()) {
             $bot->reply('You have already started the bot!');
         } else {
             User::create([
