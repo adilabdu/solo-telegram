@@ -68,7 +68,7 @@ class UserConversation extends Conversation
 
             $this->reason = $answer->getText();
 
-            $this->say('Perfect! That is it. Welcome to the club. And remember, first rule of SOLO, is never talk about SOL-- of course we kid! Tell everyone you know!');
+//            $this->say('Perfect! That is it. Welcome to the club. And remember, first rule of SOLO, is never talk about SOL-- of course we kid! Tell everyone you know!');
             $this->storeUser();
         });        
     }
@@ -96,12 +96,20 @@ class UserConversation extends Conversation
     }
 
     public function confirm() {
-        $question = Question::create("Thanks! That's all we need. Just to confirm: ", ["parse_mode" => "Markdown"])
+
+        $markdownText = "Okay, so just to confirm:
+            **Name**: ".$this->fullName. "
+            **Contact**: ".$this->contactInfo. ";
+            **Profession**: ".$this->profession. ";
+            **Organization**: ".$this->organization. ";
+            **Reason for Joining the Network**: ".$this->reason;
+
+        $question = Question::create($markdownText, ["parse_mode" => "Markdown"])
             ->fallback('Unable to ask question')
             ->callbackId('ask_reason')
             ->addButtons([
                 Button::create('Edit')->value('edit'),
-                Button::create('Perfect')->value('perfect'),
+                Button::create('Looks good 👌')->value('perfect'),
             ]);
 
 
