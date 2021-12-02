@@ -68,7 +68,6 @@ class UserConversation extends Conversation
 
             $this->reason = $answer->getText();
 
-//            $this->say('Perfect! That is it. Welcome to the club. And remember, first rule of SOLO, is never talk about SOL-- of course we kid! Tell everyone you know!');
             $this->say('Great! So, just to confirm... ');
             $this->confirm();
         });        
@@ -92,16 +91,12 @@ class UserConversation extends Conversation
             "organization" => $this->organization,
             "reason" => $this->reason
         ]);
+        $this->say('Perfect! That is it. Welcome to the club. And remember, first rule of SOLO, is never talk about SOL-- of course we kid! Tell everyone you know!');
     }
 
     public function confirm() {
 
-        $markdownText =
-'<b>Name</b>   '.$this->fullName. '
-<b>Contact</b>   '.$this->contactInfo. '
-<b>Profession</b>   '.$this->profession. '
-<b>Organization</b>   '.$this->organization. '
-<b>Reason for joining SOLO</b>   '.$this->reason;
+        $markdownText = '<b>Name</b>   '.$this->fullName. '<br><b>Contact</b>   '.$this->contactInfo. '<br><b>Profession</b>   '.$this->profession. '<br><b>Organization</b>   '.$this->organization. '<br><br><b>Reason for joining SOLO</b>   '.$this->reason;
 
         $question = Question::create($markdownText)
             ->addButtons([
