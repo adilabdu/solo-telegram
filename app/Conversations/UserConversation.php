@@ -66,26 +66,31 @@ class UserConversation extends Conversation
             $this->reason = $answer->getText();
 
             $this->say('Perfect! That is it. Welcome to the club. And remember, first rule of SOLO, is never talk about SOL-- of course we kid! Tell everyone you know!');
-        });
+            $this->storeUser();
+        });        
+    }
+
+    protected function storeUser() {
+        $this->say($this->fullName);
+        $this->say($this->telegram_id);
+        $this->say($this->contactInfo);
+        $this->say($this->profession);
+        $this->say($this->organization);
+        $this->say($this->reason);
+        
+        User::create([
+            "telegram_id" => $this->telegram_id,
+            "name" => $this->fullName,
+            "contact" => $this->contactInfo,
+            "profession" => $this->profession,
+            "organization" => $this->organization,
+            "reason" => $this->reason
+        ]);
     }
 
     // Start conversation
     public function run()
     {
         $this->askFullName();
-        $this->say("Discovery");
-        $this->say($this->telegram_id);
-        $this->say($this->contactInfo);
-        $this->say($this->profession);
-        $this->say($this->organization);
-        $this->say($this->reason);
-        // User::create([
-        //     "telegram_id" => '$this->telegram_id',
-        //     "name" => $this->fullName,
-        //     "contact" => $this->contactInfo,
-        //     "profession" => $this->profession,
-        //     "organization" => $this->organization,
-        //     "reason" => $this->reason
-        // ]);
     }
 }
