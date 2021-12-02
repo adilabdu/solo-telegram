@@ -70,7 +70,7 @@ class UserConversation extends Conversation
 
 //            $this->say('Perfect! That is it. Welcome to the club. And remember, first rule of SOLO, is never talk about SOL-- of course we kid! Tell everyone you know!');
             $this->say('Great! So, just to confirm... ');
-            $this->storeUser();
+            $this->confirm();
         });        
     }
 
@@ -92,8 +92,6 @@ class UserConversation extends Conversation
             "organization" => $this->organization,
             "reason" => $this->reason
         ]);
-
-        $this->confirm();
     }
 
     public function confirm() {
@@ -116,7 +114,7 @@ class UserConversation extends Conversation
                 if ($answer->getValue() === 'edit') {
                     $this->editAnswers();
                 } else {
-                    $this->say(Inspiring::quote());
+                    $this->storeUser();
                 }
             }
         }, ["parse_mode" => "HTML"]);
@@ -126,19 +124,52 @@ class UserConversation extends Conversation
 
         $question = Question::create("Which answer do you want to edit?")
             ->addButtons([
-                Button::create('Name 📝')->value('name'),
-                Button::create('Contact 📝')->value('contact'),
-                Button::create('Profession 📝')->value('profession'),
-                Button::create('Organization 📝')->value('organization'),
-                Button::create('Reason for joining SOLO 📝')->value('reason'),
+                Button::create('Name')->value('name'),
+                Button::create('Contact')->value('contact'),
+                Button::create('Profession')->value('profession'),
+                Button::create('Organization')->value('organization'),
+                Button::create('Reason for joining')->value('reason'),
             ]);
 
         $this->ask($question, function (Answer $answer) {
             if ($answer->isInteractiveMessageReply()) {
-                // handle by value
-                $this->reply('Okay chill');
+                $this->updateAnswer($answer->getValue());
             }
         }, ["parse_mode" => "HTML"]);
+    }
+
+    private function updateAnswer(String $value) {
+
+        switch ($value) {
+            case 'name':
+                $this->ask("What's your full name?", function(Answer $answer) {
+                    $this->fullName = $answer->getText();
+                });
+                break;
+            case 'contact':
+                $this->ask("How shall we reach you?", function(Answer $answer) {
+                    $this->contactInfo = $answer->getText();
+                });
+                break;
+            case 'profession':
+                $this->ask("What's your profession?", function(Answer $answer) {
+                    $this->profession = $answer->getText();
+                });
+                break;
+            case 'organization':
+                $this->ask("Where do you work (organization)?", function(Answer $answer) {
+                    $this->organization = $answer->getText();
+                });
+                break;
+            case 'reason':
+                $this->ask("Why do you want to join SOLO SOLO SOLO?", function(Answer $answer) {
+                    $this->reason = $answer->getText();
+                });
+                break;
+        }
+
+        $this->say('Great! So, <i>again</i> just to confirm... ', ["parse_mode" => "HTML"]);
+        $this->confirm();
     }
 
     // Start conversation
