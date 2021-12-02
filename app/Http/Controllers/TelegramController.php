@@ -32,7 +32,7 @@ class TelegramController extends Controller
 
         $htmlText = "This is <b>SOLO SOLO SOLO a performing arts network </b> – linking artists, researchers, and programmers whose work center the East African performing arts practice, narrative, and archive. 
  
- Are you a performing artist living and working in East Africa, join our network and activate the SOLO SOLO SOLO annual program physically and/or online.";
+Are you a performing artist living and working in East Africa, join our network and activate the SOLO SOLO SOLO annual program physically and/or online.";
 
         $bot->reply($htmlText, ["parse_mode" => "HTML"]);
     }
