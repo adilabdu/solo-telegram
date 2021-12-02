@@ -103,25 +103,40 @@ class UserConversation extends Conversation
 <b>Contact</b>   '.$this->contactInfo. '
 <b>Profession</b>   '.$this->profession. '
 <b>Organization</b>   '.$this->organization. '
-<b>Reason for joining the network</b>   '.$this->reason;
+<b>Reason for joining SOLO</b>   '.$this->reason;
 
         $question = Question::create($markdownText)
-            ->fallback('Unable to ask question')
-            ->callbackId('ask_reason')
             ->addButtons([
-                Button::create('Edit')->value('edit'),
+                Button::create('Edit 📝')->value('edit'),
                 Button::create('Looks good 👌')->value('perfect'),
             ]);
 
-
-        return $this->ask($question, function (Answer $answer) {
+        $this->ask($question, function (Answer $answer) {
             if ($answer->isInteractiveMessageReply()) {
-                if ($answer->getValue() === 'joke') {
-                    $joke = json_decode(file_get_contents('http://api.icndb.com/jokes/random'));
-                    $this->say($joke->value->joke);
+                if ($answer->getValue() === 'edit') {
+                    $this->editAnswers();
                 } else {
                     $this->say(Inspiring::quote());
                 }
+            }
+        }, ["parse_mode" => "HTML"]);
+    }
+
+    public function editAnswers() {
+
+        $question = Question::create("Which answer do you want to edit?")
+            ->addButtons([
+                Button::create('Name 📝')->value('name'),
+                Button::create('Contact 📝')->value('contact'),
+                Button::create('Profession 📝')->value('profession'),
+                Button::create('Organization 📝')->value('organization'),
+                Button::create('Reason for joining SOLO 📝')->value('reason'),
+            ]);
+
+        $this->ask($question, function (Answer $answer) {
+            if ($answer->isInteractiveMessageReply()) {
+                // handle by value
+                $this->reply('Okay chill');
             }
         }, ["parse_mode" => "HTML"]);
     }
