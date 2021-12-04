@@ -28,9 +28,7 @@ class UserConversation extends Conversation
             "organization" => $this->organization,
             "reason" => $this->reason
         ]);
-        $this->say("Perfect! That's it. Welcome to the network.
-            And remember, first rule of SOLO, is never talk about SOL--
-            of course we kid! Tell everybody you know!");
+        $this->say("Perfect! That's it. Welcome to the network. And remember, first rule of SOLO, is never talk about SOL-- of course we kid! Tell everybody you know!");
     }
 
     public function confirm() {
