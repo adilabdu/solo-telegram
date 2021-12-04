@@ -17,7 +17,7 @@ class TelegramController extends Controller
         try {
 
             if(User::where("telegram_id", "=", $userID)->exists()) {
-                $bot->reply("You have already registered. Thank you for participating!");
+                $bot->reply("You have already registered. Thank you for joining!");
             } else {
                 $bot->startConversation(new UserConversation($userID));
             }           
@@ -38,7 +38,7 @@ Are you a performing artist living and working in East Africa, join our network 
     }
 
     public function fallback(BotMan $bot) {
-        $bot->reply('Sorry, I did not get that, try running command "/help"');
+        $bot->reply('Sorry, I did not get that, try running command /help');
     }
 
     public function export() {
