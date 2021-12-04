@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Conversations\UserConversation;
+use App\Conversations\NewUserConversation;
+use App\Conversations\ExistingUserConversation;
 use BotMan\BotMan\BotMan;
 use App\User;
 use Exception;
@@ -19,8 +20,27 @@ class TelegramController extends Controller
             if(User::where("telegram_id", "=", $userID)->exists()) {
                 $bot->reply("You have already registered. Thank you for joining!");
             } else {
-                $bot->startConversation(new UserConversation($userID));
+                $bot->startConversation(new NewUserConversation($userID));
             }           
+
+        } catch(Exception $e) {
+            $bot->reply('Exception: ' . $e);
+        }
+
+    }
+
+    public function view(Botman $bot) {
+
+        $userID = $bot->getUser()->getId();
+
+        try {
+
+            if(User::where("telegram_id", "=", $userID)->exists()) {
+                $user = User::where("telegram_id", "=", $userID)->first();
+                $bot->startConversation(new ExistingUserConversation($user));
+            } else {
+                $bot->reply("You have already registered. Thank you for joining!");
+            }
 
         } catch(Exception $e) {
             $bot->reply('Exception: ' . $e);
