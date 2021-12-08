@@ -10,4 +10,8 @@ $botman->hears('/start', TelegramController::class.'@start');
 
 $botman->hears('/help', TelegramController::class.'@help')->stopsConversation();
 
+$botman->hears('/exit', function() {
+    $this->reply("No worries! Just type /start whenever you want to register.");
+})->stopsConversation();
+
 $botman->fallback(TelegramController::class.'@fallback');
