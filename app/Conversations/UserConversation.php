@@ -25,7 +25,7 @@ class UserConversation extends Conversation
             "telegram_id" => $this->telegram_id,
             "name" => $this->fullName,
             "phone" => $this->phone,
-            "email" => $this->email ?: '❌',
+            "email" => $this->email,
             "profession" => $this->profession,
             "organization" => $this->organization,
             "reason" => $this->reason
@@ -46,7 +46,7 @@ class UserConversation extends Conversation
         $markdownText = '
 <b>Name</b>   '.$this->fullName. '
 <b>Phone</b>   '.$this->phone. '
-<b>Email</b>   '.$this->email;
+<b>Email</b>   '.$this->email ?: '❌';
 
         $question = Question::create($markdownText)
             ->addButtons([

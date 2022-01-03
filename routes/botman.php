@@ -9,6 +9,7 @@ $botman->hears('/start', TelegramController::class.'@start');
 //$botman->hears('/view', TelegramController::class.'@view');
 
 //$botman->hears('/help', TelegramController::class.'@help')->stopsConversation();
+$botman->hears('/help', TelegramController::class.'@help');
 
 //$botman->hears('/exit', function() {
 //    $this->reply("No worries! Just type /start whenever you want to register.");
