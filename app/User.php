@@ -15,8 +15,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'telegram_id', 'name', 'contact', 'profession',
-        'organization', 'reason'
+        'telegram_id', 'name', 'phone', 'email',
+        'profession', 'organization', 'reason'
     ];
 
     /**

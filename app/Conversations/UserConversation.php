@@ -12,10 +12,11 @@ class UserConversation extends Conversation
 {
 
     protected $fullName;
-    protected $contactInfo;
+    protected $phone;
     protected $profession;
     protected $organization;
     protected $reason;
+    protected $email;
     protected $telegram_id;
 
     protected function storeUser() {
@@ -23,7 +24,8 @@ class UserConversation extends Conversation
         User::create([
             "telegram_id" => $this->telegram_id,
             "name" => $this->fullName,
-            "contact" => $this->contactInfo,
+            "phone" => $this->phone,
+            "email" => $this->email,
             "profession" => $this->profession,
             "organization" => $this->organization,
             "reason" => $this->reason
@@ -33,13 +35,17 @@ class UserConversation extends Conversation
 
     public function confirm() {
 
-        $markdownText =
-            '<b>Name</b>   '.$this->fullName. '
-<b>Contact</b>   '.$this->contactInfo. '
-<b>Profession</b>   '.$this->profession. '
-<b>Organization</b>   '.$this->organization. '
+//        $markdownText = '
+//<b>Name</b>   '.$this->fullName. '
+//<b>Profession</b>   '.$this->profession. '
+//<b>Organization</b>   '.$this->organization. '
+//
+//<b>Reason for joining SOLO</b>   '.$this->reason;
 
-<b>Reason for joining SOLO</b>   '.$this->reason;
+        $markdownText = '
+<b>Name</b>   '.$this->fullName. '
+<b>Phone</b>   '.$this->phone. '
+<b>Email</b>   '.$this->email;
 
         $question = Question::create($markdownText)
             ->addButtons([

@@ -29,7 +29,7 @@ class NewUserConversation extends UserConversation
     public function askPhone() {
         $this->ask('Phone Number / ስልክ ቁጥር', function(Answer $answer) {
 
-            $this->contactInfo = $answer->getText();
+            $this->phone = $answer->getText();
 
             $this->say('GREAT!');
             $this->askEmail();
@@ -46,7 +46,7 @@ class NewUserConversation extends UserConversation
             if ($answer->isInteractiveMessageReply()) {
                 $this->updateInfo($answer->getValue());
             } else {
-                $this->profession = $answer->getText();
+                $this->email = $answer->getText();
                 $this->confirm();
             }
         }, ["parse_mode" => "HTML"]);
@@ -87,10 +87,11 @@ class NewUserConversation extends UserConversation
         $question = Question::create("Which info do you want to edit?")
             ->addButtons([
                 Button::create('Name')->value('name'),
-                Button::create('Contact')->value('contact'),
-                Button::create('Profession')->value('profession'),
-                Button::create('Organization')->value('organization'),
-                Button::create('Reason for joining')->value('reason'),
+                Button::create('Phone')->value('phone'),
+                Button::create('Email')->value('email'),
+//                Button::create('Profession')->value('profession'),
+//                Button::create('Organization')->value('organization'),
+//                Button::create('Reason for joining')->value('reason'),
                 Button::create('Never mind -- take me back 🔙')->value('return'),
             ]);
 
@@ -110,9 +111,15 @@ class NewUserConversation extends UserConversation
                     $this->reconfirm();
                 });
                 break;
-            case 'contact':
-                $this->ask("How shall we reach you?", function(Answer $answer) {
-                    $this->contactInfo = $answer->getText();
+            case 'phone':
+                $this->ask("Phone", function(Answer $answer) {
+                    $this->phone = $answer->getText();
+                    $this->reconfirm();
+                });
+                break;
+            case 'email':
+                $this->ask("Email", function(Answer $answer) {
+                    $this->email = $answer->getText();
                     $this->reconfirm();
                 });
                 break;
