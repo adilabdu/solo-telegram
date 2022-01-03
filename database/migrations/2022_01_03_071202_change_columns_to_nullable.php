@@ -13,8 +13,7 @@ class ChangeColumnsToNullable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function($table)
-        {
+        Schema::table('users', function(Blueprint $table) {
             $table->string('contact')->nullable()->change();
             $table->string('profession')->nullable()->change();
             $table->string('organization')->nullable()->change();
@@ -29,7 +28,7 @@ class ChangeColumnsToNullable extends Migration
      */
     public function down()
     {
-        Schema::table('nullable', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //
         });
     }
