@@ -30,7 +30,8 @@ class UserConversation extends Conversation
             "organization" => $this->organization,
             "reason" => $this->reason
         ]);
-        $this->say("Perfect! That's it. Welcome to the network. And remember, first rule of SOLO, is never talk about SOL-- of course we kid! Tell everybody you know!");
+        $this->say("THANK YOU!" . chr(10) . chr(10) . "WELCOME TO SOLO SOLO SOLO DANCE NETWORK. WE WILL SEND CONFIRMATION OF MEMBERSHIP ON PHONE AND/OR EMAIL.");
+        $this->say("እንኳን ወደ ሶሎ ሶሎ ሶሎ የኪነት ጥበብ ባለሙያዎችን መድረክ መጡ" . chr(10) . chr(10) . "የአባልት ማረጋገገጫ በስልክ ወይም ኢሜል ይጠብቁ");
     }
 
     public function confirm() {
