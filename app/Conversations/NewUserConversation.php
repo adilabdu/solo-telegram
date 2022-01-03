@@ -106,19 +106,19 @@ class NewUserConversation extends UserConversation
 
         switch ($value) {
             case 'name':
-                $this->ask("What's your full name?", function(Answer $answer) {
+                $this->ask("Full Name / ሙሉ ስም", function(Answer $answer) {
                     $this->fullName = $answer->getText();
                     $this->reconfirm();
                 });
                 break;
             case 'phone':
-                $this->ask("Phone", function(Answer $answer) {
+                $this->ask("Phone Number / ስልክ ቁጥር", function(Answer $answer) {
                     $this->phone = $answer->getText();
                     $this->reconfirm();
                 });
                 break;
             case 'email':
-                $this->ask("Email", function(Answer $answer) {
+                $this->ask("EMAIL / ኢሜል", function(Answer $answer) {
                     $this->email = $answer->getText();
                     $this->reconfirm();
                 });

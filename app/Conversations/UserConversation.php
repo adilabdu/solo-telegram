@@ -25,7 +25,7 @@ class UserConversation extends Conversation
             "telegram_id" => $this->telegram_id,
             "name" => $this->fullName,
             "phone" => $this->phone,
-            "email" => $this->email,
+            "email" => $this->email ?: '❌',
             "profession" => $this->profession,
             "organization" => $this->organization,
             "reason" => $this->reason
