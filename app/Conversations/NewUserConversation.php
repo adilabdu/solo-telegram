@@ -47,6 +47,7 @@ class NewUserConversation extends UserConversation
                 $this->updateInfo($answer->getValue());
             } else {
                 $this->profession = $answer->getText();
+                $this->confirm();
             }
         }, ["parse_mode" => "HTML"]);
     }
