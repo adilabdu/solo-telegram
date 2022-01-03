@@ -37,9 +37,9 @@ class NewUserConversation extends UserConversation
     }
 
     public function askEmail() {
-        $question = Question::create("EMAIL / ኢሜል (ካለ)")
+        $question = Question::create("EMAIL / ኢሜል")
             ->addButtons([
-                Button::create("👎 Skip / ዝለል")->value('skip'),
+                Button::create("Skip / ዝለል ⏩")->value('skip'),
             ]);
 
         $this->ask($question, function (Answer $answer) {
