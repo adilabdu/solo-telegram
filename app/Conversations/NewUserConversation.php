@@ -14,8 +14,9 @@ class NewUserConversation extends UserConversation
     }
  
     public function askFullName() {
-        $this->say('Thank you for your interest to join our network. <br><br> SOLO SOLO aims to serve as a fortitude and a life-line for moments of shared crisis. & advocate for the vitality of performing arts to influence policy and action.  Share with us your name + contact to get registered on the network. <br><br> ሶሎ ሶሎ ሶሎ የኪነት ጥበብ ጋር በተያያዘ የሚሰሩ የተለያዩ ባለሙያዎችን የሚያገናኝ መድረክ ሲሆን በውስጡም የጥበብ ባለሙያዎችን፣ ተመራማሪዎችን እና ፕሮግራመሮችን ያገናኛል። ትኩረቱም በምስራቅ አፍሪካ የኪነት ጥበብ፣ ታሪክ እና ጭብጥ ላይ ነው።', ["parse_mode" => "HTML"]);
-
+        $this->say('Thank you for your interest to join our network. <br><br> SOLO SOLO aims to serve as a fortitude and a life-line for moments of shared crisis. & advocate for the vitality of performing arts to influence policy and action.  Share with us your name + contact to get registered on the network.', ["parse_mode" => "HTML"]);
+        $this->say('ሶሎ ሶሎ ሶሎ የኪነት ጥበብ ጋር በተያያዘ የሚሰሩ የተለያዩ ባለሙያዎችን የሚያገናኝ መድረክ ሲሆን በውስጡም የጥበብ ባለሙያዎችን፣ ተመራማሪዎችን እና ፕሮግራመሮችን ያገናኛል። ትኩረቱም በምስራቅ አፍሪካ የኪነት ጥበብ፣ ታሪክ እና ጭብጥ ላይ ነው።');
+        
         $this->ask('Full Name / ሙሉ ስም', function(Answer $answer) {
 
             $this->fullName = $answer->getText();
