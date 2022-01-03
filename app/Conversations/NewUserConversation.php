@@ -142,8 +142,10 @@ class NewUserConversation extends UserConversation
                 });
                 break;
             case 'return':
-            case 'skip':
                 $this->confirm();
+                break;
+            case 'skip':
+                $this->storeUser();
                 break;
         }
     }
