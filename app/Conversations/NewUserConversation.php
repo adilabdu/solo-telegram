@@ -32,7 +32,7 @@ class NewUserConversation extends UserConversation
             $this->contactInfo = $answer->getText();
 
             $this->say('GREAT!');
-            $this->askProfession();
+            $this->askEmail();
         });
     }
 
@@ -45,6 +45,8 @@ class NewUserConversation extends UserConversation
         $this->ask($question, function (Answer $answer) {
             if ($answer->isInteractiveMessageReply()) {
                 $this->updateInfo($answer->getValue());
+            } else {
+                $this->profession = $answer->getText();
             }
         }, ["parse_mode" => "HTML"]);
     }
