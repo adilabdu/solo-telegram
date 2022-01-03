@@ -47,7 +47,7 @@ class NewUserConversation extends UserConversation
                 $this->updateInfo($answer->getValue());
             } else {
                 $this->email = $answer->getText();
-                $this->confirm();
+                $this->storeUser();
             }
         }, ["parse_mode" => "HTML"]);
     }
