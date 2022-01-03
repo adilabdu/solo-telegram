@@ -22,18 +22,31 @@ class NewUserConversation extends UserConversation
             $this->fullName = $answer->getText();
 
             $this->say('Nice to meet you '.$this->fullName);
-            $this->askContact();
+            $this->askPhone();
         });
     }
 
-    public function askContact() {
-        $this->ask('Send us your contact so we can reach you (Email / Phone / Both)', function(Answer $answer) {
+    public function askPhone() {
+        $this->ask('Phone Number / ስልክ ቁጥር', function(Answer $answer) {
 
             $this->contactInfo = $answer->getText();
 
-            $this->say('Great! Now it is almost like we are family!');
+            $this->say('GREAT!');
             $this->askProfession();
         });
+    }
+
+    public function askEmail() {
+        $question = Question::create("EMAIL / ኢሜል (ካለ)")
+            ->addButtons([
+                Button::create("👎 Skip / ዝለል")->value('skip'),
+            ]);
+
+        $this->ask($question, function (Answer $answer) {
+            if ($answer->isInteractiveMessageReply()) {
+                $this->updateInfo($answer->getValue());
+            }
+        }, ["parse_mode" => "HTML"]);
     }
 
     public function askProfession() {
@@ -119,6 +132,7 @@ class NewUserConversation extends UserConversation
                 });
                 break;
             case 'return':
+            case 'skip':
                 $this->confirm();
                 break;
         }
